@@ -1,6 +1,12 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include <iostream>
+#include <cstdlib>
+
+using std::cout;
+using std::endl;
+
 // forward declation of LinkedList
 template<typename T>
 class LinkedList;
@@ -32,12 +38,12 @@ Node<T> * head = nullptr;
 
 Node<T> * tail = nullptr;
 
-Node<T> find_tail()  
+Node<T> * find_tail()  
 {
 	if ( number_of_elements == 0 )
 		return nullptr;
 
-	Node<T> current = head;
+	Node<T> * current = head;
 	while ( current->next != nullptr )
 	{
 		current = current->next;
@@ -53,7 +59,7 @@ Node<T> find_tail()
 */
 void append(T data)
 {
-	Node<T> node = new Node<T>;
+	Node<T> * node = new Node<T>;
 	node->data=data;
 	if (number_of_elements == 0)
 	{
@@ -91,14 +97,14 @@ void clear(void)
 	}
 }
 
-/**
+/*
 * Returns the item at the given index location.
 *
 * @param i the index of the item to return
 */
 T get(int i) const
 {
-	if (number_of_elements != 0)
+	//if (number_of_elements != 0)
 	{
 		Node<T> * temp = head;
 		for (int j = 0; j < i; j++)
@@ -107,10 +113,11 @@ T get(int i) const
 		}
 		return temp->data;
 	}
-	else 
+//	else 
 	{
-		cout << "List is empty" << endl;
-		return nullptr;
+//		cout << "List is empty" << endl;
+		//return nullptr;
+//		return NULL;
 	}
 }//get
 
@@ -128,7 +135,7 @@ void insert(int i, T data)
 	}
 	else 
 	{
-		Node<T> * node = new Node<T>
+		Node<T> * node = new Node<T>;
 		node->data = data;
 		Node<T> * temp = head;
 		for (int j = 0; j < i-1; j++)
@@ -139,10 +146,8 @@ void insert(int i, T data)
 		node->next->prev = node;
 
 		temp->next = node;
-	}
-	else 
-		cout << "List is empty" << endl;
-}//get
+	}	
+}//insert
 
 /**
 * Adds an item to the front of this list.
@@ -151,7 +156,7 @@ void insert(int i, T data)
 */
 void prepend(T data)
 {
-	Node<T> node = new Node<T>;
+	Node<T> * node = new Node<T>;
 	node->data=data;
 	if (number_of_elements == 0)
 	{
@@ -160,10 +165,9 @@ void prepend(T data)
 	}
 	else
 	{
-		node->prev = find_tail();
-		find_tail()->next = node;
-		tail = node;
-		//tail = tail->next;
+		node->next = head;
+		head->prev = node;
+		head = node;
 	}
 
 	number_of_elements++;
@@ -198,7 +202,7 @@ void set(int i, T data)
 const int size() const
 {
 	if ( number_of_elements == 0 )
-		return 0
+		return 0;
 
 	if (head == NULL) 
 	{
@@ -207,7 +211,7 @@ const int size() const
 
 	int index = 1;
 
-	Node<T> current = head;
+	Node<T> * current = head;
 	while ( current->next != nullptr )
 	{
 		current = current->next;
@@ -220,12 +224,26 @@ const int size() const
 * Returns whether or not this linked list is empty. */
 const bool empty() const {
 
-	if(this.node.next == NULL & this.node.prev == NULL)
+	//if(this.node.next == NULL & this.node.prev == NULL)
 	{
 		return size() == 0;	
 	}
 
 } // empty
+
+void print()
+{
+	if (number_of_elements != 0)
+	{
+		Node<T> * current = head;
+		while (current != nullptr)
+		{
+			cout << current->data << " ";
+			current = current->next;
+		}
+	}
+	cout << endl;
+}
 
 }; 
 // LinkedList
