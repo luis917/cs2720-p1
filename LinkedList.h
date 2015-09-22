@@ -147,6 +147,7 @@ void insert(int i, T data)
 
 		temp->next = node;
 	}	
+	number_of_elements++;
 }//insert
 
 /**
@@ -243,6 +244,18 @@ void print()
 		}
 	}
 	cout << endl;
+}
+
+void remove_tail()
+{
+	if ( tail != NULL) 
+	{
+		Node<T> * temp = find_tail();
+		tail = temp->prev;
+		delete temp;
+		tail->next = nullptr;
+		number_of_elements--;
+	}
 }
 
 }; 
