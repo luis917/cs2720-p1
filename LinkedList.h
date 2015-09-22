@@ -253,7 +253,7 @@ void remove_tail()
 		Node<T> * temp = find_tail();
 		tail = temp->prev;
 		delete temp;
-		tail->next = nullptr;
+		//tail->next = nullptr;
 		number_of_elements--;
 	}
 }

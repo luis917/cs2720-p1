@@ -65,8 +65,12 @@ T pop(void)
 {
 	if (list->empty() != 1)
 	{
-		T item = list->get(list->find_tail());
+		//T item = list->get(list->find_tail());
+		cout << "about to get item" << endl;
+		T item = list->get(list->size()-1);
+		cout << "about to remove tail" << endl;
 		list->remove_tail();
+		cout << "removed tail\n";
 		return item;
 	}
 	else 
@@ -84,7 +88,8 @@ T peek(void) const
 {
 	if (list->empty() != 1)
 	{
-		T item = list->get(list->find_tail());
+		//T item = list->get(list->find_tail());
+		T item = list->get(list->size()-1);
 		return item;
 	}
 	else
