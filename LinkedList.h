@@ -32,13 +32,13 @@ int number_of_elements = 0;
 
 public:
 
-Node<T> * head = nullptr; 
+Node<T> * head = nullptr;
 
 //Node<T> * tail = tail();
 
 Node<T> * tail = nullptr;
 
-Node<T> * find_tail()  
+Node<T> * find_tail()
 {
 	if ( number_of_elements == 0 )
 		return nullptr;
@@ -49,7 +49,7 @@ Node<T> * find_tail()
 		current = current->next;
 	}
 	return current;
-}//find_tail 
+}//find_tail
 
 
 /**
@@ -67,7 +67,7 @@ void append(T data)
 		tail = node;
 	}
 	else
-	{	
+	{
 		node->prev = find_tail();
 		find_tail()->next = node;
 		tail = node;
@@ -79,7 +79,7 @@ void append(T data)
 /**
 * Removes all elements from this list.
 */
-void clear(void) 
+void clear(void)
 {
 	if (number_of_elements != 0)
 	{
@@ -113,7 +113,7 @@ T get(int i) const
 		}
 		return temp->data;
 	}
-//	else 
+//	else
 	{
 //		cout << "List is empty" << endl;
 		//return nullptr;
@@ -133,7 +133,7 @@ void insert(int i, T data)
 	{
 		prepend(data);
 	}
-	else 
+	else
 	{
 		Node<T> * node = new Node<T>;
 		node->data = data;
@@ -146,7 +146,7 @@ void insert(int i, T data)
 		node->next->prev = node;
 
 		temp->next = node;
-	}	
+	}
 	number_of_elements++;
 }//insert
 
@@ -191,7 +191,7 @@ void set(int i, T data)
 		}
 		temp->data = data;
 	}
-	else 
+	else
 	{
 		cout << "List is empty" << endl;
 	}
@@ -205,7 +205,7 @@ const int size() const
 	if ( number_of_elements == 0 )
 		return 0;
 
-	if (head == NULL) 
+	if (head == NULL)
 	{
 		return 0;
 	}
@@ -227,7 +227,7 @@ const bool empty() const {
 
 	//if(this.node.next == NULL & this.node.prev == NULL)
 	{
-		return size() == 0;	
+		return size() == 0;
 	}
 
 } // empty
@@ -248,17 +248,21 @@ void print()
 
 void remove_tail()
 {
-	if ( tail != NULL) 
+	if ( tail != NULL)
 	{
-		Node<T> * temp = find_tail();
-		tail = temp->prev;
+		Node<T> * temp = tail;
+		if (tail->prev != nullptr)
+		{
+			tail = temp->prev;
+			tail->next = nullptr;
+		}
 		delete temp;
 		//tail->next = nullptr;
 		number_of_elements--;
 	}
 }
 
-}; 
+};
 // LinkedList
 #endif /** LINKED_LIST_H */
 

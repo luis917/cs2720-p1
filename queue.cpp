@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
-#include "ArrayQueue.h"
-#include "LinkedQueue.h"
+//#include "ArrayQueue.h"
+//#include "LinkedQueue.h"
 #include "LinkedList.h"
 #include "LinkedStack.h"
 using std::cout;
@@ -39,12 +39,21 @@ cout << endl << "testing linkedstack" << endl;
 LinkedStack <int> * list = new LinkedStack <int> {};
 list->push(5);
 list->push(2);
+list->push(3);
 list->print();
 cout << "peek: " << list->peek() << endl;
 cout << "pop: " << list->pop() << endl;
 list->print();
-//cout << "pop: " << list->pop() << endl;
-//cout << "size" << list->size() << endl;
+cout << "pop: " << list->pop() << endl;
+cout << "size: " << list->size() << endl;
+list->print();
+cout << "size: " << list->size() << endl;
+cout << "pop: " << list->pop() << endl;
+list->print();
+cout << "size: " << list->size() << endl;
+cout << "pop: " << list->pop() << endl;
+cout << "size: " << list->size() << endl;
+delete list;
 
 // Queue<int> * q1 = new ArrayQueue<int> {};
 // Queue<int> * q2 = new LinkedQueue<int> {};
