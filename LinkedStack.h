@@ -40,7 +40,7 @@ LinkedStack(const LinkedStack<T> & other) {
 } // LinkedStack
 
 // Destructor
-  ~LinkedStack(void) {
+ ~LinkedStack(void) {
 	// TODO implement the destructor
   	list->clear();
   	delete list;
@@ -61,7 +61,7 @@ void push(T data)
 /**
 * Removes the item at the top of this stack and returns that item
 */
-T pop(void) 
+T pop(void)
 {
 	if (list->empty() != 1)
 	{
@@ -73,7 +73,7 @@ T pop(void)
 		cout << "removed tail\n";
 		return item;
 	}
-	else 
+	else
 	{
 		cout << "empty stack" << endl;
 		return -1;
@@ -84,12 +84,12 @@ T pop(void)
 * Returns the item at the top of this stack without removing it from the
 * stack.
 */
-T peek(void) const 
+T peek(void) const
 {
-	if (list->empty() != 1)
+	if (empty() != 1)
 	{
 		//T item = list->get(list->find_tail());
-		T item = list->get(list->size()-1);
+		T item = list->get(size()-1);
 		return item;
 	}
 	else
