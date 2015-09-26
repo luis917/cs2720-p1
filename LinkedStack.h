@@ -35,14 +35,18 @@ LinkedStack(const LinkedStack<T> & other) {
 			T temporary_value = other.list->get(i);
 			list->append(temporary_value);
 		}
+		cout << "copy constructor called" << endl;
 
 	}
+	else
+		cout << "Empty stack " << endl;
 } // LinkedStack
 
 // Destructor
  ~LinkedStack(void) {
 	// TODO implement the destructor
   	list->clear();
+  	cout << "destructed" << endl;
   	delete list;
 } // ~LinkedStack
 

@@ -104,21 +104,33 @@ void clear(void)
 */
 T get(int i) const
 {
-	//if (number_of_elements != 0)
+	if (number_of_elements != 0)
 	{
-		Node<T> * temp = head;
-		for (int j = 0; j < i; j++)
+		if (i == 0)
 		{
-			temp = temp->next;
+			return head->data;
 		}
-		return temp->data;
+		else if (i == size()-1)
+		{
+			return tail->data;
+		}
+		else
+		{
+			Node<T> * temp = head;
+			for (int j = 0; j < i; j++)
+			{
+				temp = temp->next;
+			}
+			return temp->data;
+		}
 	}
-//	else
-	{
-//		cout << "List is empty" << endl;
+	else return -1;
+	//else
+//	{
+	//	cout << "List is empty" << endl;
 		//return nullptr;
-//		return NULL;
-	}
+		//return nullptr;
+//	}
 }//get
 
 /**
@@ -242,8 +254,12 @@ void print()
 			cout << current->data << " ";
 			current = current->next;
 		}
+		cout << endl;
 	}
-	cout << endl;
+	else
+	{
+		cout << "empty" << endl;
+	}
 }
 
 void remove_tail()
@@ -258,6 +274,21 @@ void remove_tail()
 		}
 		delete temp;
 		//tail->next = nullptr;
+		number_of_elements--;
+	}
+}
+
+void remove_head()
+{
+	if (head != nullptr)
+	{
+		Node<T> * temp = head;
+		if (head->next != nullptr)
+		{
+			head = temp->next;
+			head->prev = nullptr;
+		}
+		delete temp;
 		number_of_elements--;
 	}
 }
