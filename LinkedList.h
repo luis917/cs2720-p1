@@ -90,7 +90,7 @@ void clear(void)
 			delete temp;
 			temp = head;
 		}
-
+		cout << "cleared " << endl;
 		head = nullptr;
 		tail = nullptr;
 		number_of_elements = 0;

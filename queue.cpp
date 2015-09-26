@@ -13,7 +13,7 @@ using std::endl;
 using std::string;
 int main(int argc, const char * argv[]) {
 
-
+/*
 cout << "Testing Queue Implementations..." << endl;
 LinkedList<int> * list = new LinkedList<int> {};
 printf("\n");
@@ -39,9 +39,16 @@ list->append(1);
 list->print();
 cout << "get(0): " << list->get(0) << endl;
 list->append(2);
+list->append(4);
+list->print();
+cout << "insert: " << endl;
+list->insert(2,3);
+list->print();
 LinkedList<int> list2 = * list;
+delete list;
 list2.print();
-
+list2.clear();
+*/
 
 /*
 cout << endl << "testing linkedstack" << endl;
@@ -99,9 +106,15 @@ cout << "size: " << list->size() << endl;
 cout << "dequeue: " << list->dequeue() << endl;
 cout << "size: " << list->size() << endl;
 list->print();
+list->enqueue(1);
+LinkedQueue<int> list2 = *list;
+list2.print();
+delete list;
+
+
 //free(list);
 //delete list;
-cout << "pointer: " << &list << endl;
+//cout << "pointer: " << &list << endl;
 */
 
 /*
@@ -130,8 +143,11 @@ for (int index = 0; index < 102; index++)
 }
 array->push(103);
 array->print();
+ArrayStack<int> array2 = *array;
+array2.print();
+array2.size();
+array2.peek();
 */
-
 
 /*
 printf("Testing ArrayQueue\n");
@@ -162,6 +178,8 @@ for (int index = 0; index < 102; index++)
 	arrayQueue->enqueue(index);
 }
 arrayQueue->print();
+ArrayQueue<int> arrayQueue2 = *arrayQueue;
+arrayQueue2.print();
 */
 
 // Queue<int> * q1 = new ArrayQueue<int> {};

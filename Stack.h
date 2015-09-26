@@ -4,9 +4,9 @@
 #define STACK_H
 
 /**
- * A Stack represents a last-in-first-out (LIFO) stack of elements. The usual 
- * push and pop operations are provided, as well as a function to peek at the 
- * top item on the stack, and other basic collection functions. When a stack is 
+ * A Stack represents a last-in-first-out (LIFO) stack of elements. The usual
+ * push and pop operations are provided, as well as a function to peek at the
+ * top item on the stack, and other basic collection functions. When a stack is
  * first created, it contains no items.
  */
 template<typename T>
@@ -14,11 +14,11 @@ class Stack {
 
 public:
 
-  /** 
+  /**
    * Destructor
-   */  
+   */
   virtual ~Stack(void) { }
-  
+
   /**
    * Pushes an item onto the top of this stack.
    *
@@ -48,7 +48,7 @@ public:
   const bool empty() const {
     return size() == 0;
   } // empty
-  
+
 }; // Stack
 
 #endif /* STACK_H */
