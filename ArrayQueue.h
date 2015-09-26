@@ -29,10 +29,11 @@ ArrayQueue(void)
 ArrayQueue(const ArrayQueue<T> & other) {
 	max_size = other.max_size;
 	array = new T[max_size];
-	for (int index = 0; index < other.max_size; index++)
+	for (int index = 0; index < other.size(); index++)
 	//for (int index : other.max_size)
 	{
 		array[index] = other.array[index];
+		tail++;
 	}
 } // ArrayQueue
 
