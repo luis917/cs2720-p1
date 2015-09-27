@@ -68,7 +68,9 @@ void push(T data)
 		}
 		array = new_array;
 		max_size++;
-		printf("max size is now: %d\n", max_size);
+
+		//
+		//printf("max size is now: %d\n", max_size);
 	}
 	top++;
 	array[top] = data;

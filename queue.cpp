@@ -11,7 +11,11 @@
 using std::cout;
 using std::endl;
 using std::string;
-int main(int argc, const char * argv[]) {
+
+
+
+
+//int main(int argc, const char * argv[]) {
 
 /*
 cout << "Testing Queue Implementations..." << endl;
@@ -51,6 +55,7 @@ list2.clear();
 */
 
 /*
+
 cout << endl << "testing linkedstack" << endl;
 
 LinkedStack <int> * list = new LinkedStack <int> {};
@@ -82,6 +87,7 @@ list2.print();
 LinkedStack<int> * list3 = list;
 list3->print();
 //LinkedStack<int> list4 = new LinkedStack<int> {list};
+
 */
 
 /*
@@ -187,5 +193,11 @@ arrayQueue2.print();
 // test!
 // delete q1;
 // delete q2;
-return EXIT_SUCCESS;
-} // main
+
+//return EXIT_SUCCESS;
+
+//}
+// main
+
+
+
