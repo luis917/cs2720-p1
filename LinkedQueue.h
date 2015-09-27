@@ -6,26 +6,26 @@
 #include "LinkedList.h"
 using std::cout;
 using std::endl;
-using std::string;
 
 /**
-* An queue implementation based on a doubly linked list.
-*/
+ * @author - Luis Perea
+ * CS2720 - Data Structures
+ * 9/27/2015
+ * An queue implementation based on a doubly linked list.
+ */
 template<typename T>
 class LinkedQueue : public Queue<T> {
-// instance/state variables
-LinkedList<T> * list = new LinkedList<T>;
+	// instance/state variables
+	LinkedList<T> * list = new LinkedList<T>;
 
 public:
 
-// Default Constructor
-LinkedQueue(void) = default;
+	// Default Constructor
+	LinkedQueue(void) = default;
 
-// Copy Constructor
-LinkedQueue(const LinkedQueue<T> & other) {
-// TODO implement a copy constructor
-	int other_size = other.list->size();
-
+	// Copy Constructor
+	LinkedQueue(const LinkedQueue<T> & other) {
+		int other_size = other.list->size();
 		if(other_size != 0)
 		{
 			for (int i = 0; i < other_size; i++)
@@ -38,71 +38,74 @@ LinkedQueue(const LinkedQueue<T> & other) {
 		{
 			cout << "Empty Queue " << endl;
 		}
+	} // LinkedQueue
 
-} // LinkedQueue
+	// Destructor
+	~LinkedQueue(void) {
+		list->clear();
+		delete list;
+		cout << "Linked Queue destructed" << endl;
+	} // ~LinkedQueue
 
-// Destructor
- ~LinkedQueue(void) {
-	list->clear();
-	delete list;
-} // ~LinkedQueue
-
-/**
-* Adds an item to the rear of this queue.
-*
-* @param data the item to be enqueued
-*/
-void enqueue(T data)
-{
-	list->append(data);
-}
-
-/**
-* Removes the item at the front of this queue and returns that item
-*/
-T dequeue(void)
-{
-	if (empty() != 1)
+	/**
+	 * Adds an item to the rear of this queue.
+	 *
+	 * @param data the item to be enqueued
+	 */
+	void enqueue(T data)
 	{
-		T item = list->get(0);
-		list->remove_head();
-		return item;
+		list->append(data);
 	}
-	else
+
+	/**
+	 * Removes the item at the front of this queue and returns that item
+	 */
+	T dequeue(void)
 	{
-		cout << "Empty Queue" << endl;
-		return -1;
+		if (empty() != 1)
+		{
+			T item = list->get(0);
+			list->remove_head();
+			return item;
+		}
+		else
+		{
+			cout << "Empty Queue" << endl;
+			return -1;
+		}
+	} //dequeue
+
+	/**
+	 * Returns the item at the front of this queue without removing it from the
+	 * queue.
+	 */
+	T peek(void) const
+	{
+		return list->get(0);
 	}
-}
 
-/**
-* Returns the item at the front of this queue without removing it from the
-* queue.
-*/
-T peek(void) const
-{
-	return list->get(0);
-}
+	/**
+	 * Returns the number of elements in this queue.
+	 */
+	const int size(void) const
+	{
+		return list->size();
+	}
 
-/**
-* Returns the number of elements in this queue.
-*/
-const int size(void) const
-{
-	return list->size();
-}
+	/**
+	 * Returns whether or not this queue is empty.
+	 */
+	const bool empty() const {
+		return size() == 0;
+	} // empty
 
-/**
-* Returns whether or not this queue is empty.
-*/
-const bool empty() const {
-return size() == 0;
-} // empty
-
-void print(void)
-{
-	list->print();
-}
+	/*
+	 * Prints the elements in the queue
+	 */
+	void print(void)
+	{
+		list->print();
+	}
 
 }; // LinkedQueue
 #endif /* LINKED_QUEUE_H */
