@@ -1,203 +1,181 @@
 #include <iostream>
 #include <cstdlib>
-//#include "ArrayQueue.h"
-//#include "LinkedQueue.h"
 #include "LinkedList.h"
 #include "LinkedStack.h"
 #include "LinkedQueue.h"
 #include "ArrayStack.h"
 #include "ArrayQueue.h"
-
+#include <sys/time.h>
 using std::cout;
 using std::endl;
-using std::string;
 
-
-
-
-//int main(int argc, const char * argv[]) {
 
 /*
-cout << "Testing Queue Implementations..." << endl;
-LinkedList<int> * list = new LinkedList<int> {};
-printf("\n");
-list->append(5);
-list->append(2);
-cout << "get(0): " << list->get(0) << endl;
-list->print();
-list->prepend(1);
-cout << "get(0): " << list->get(0) << endl;
-list->print();
-cout << "Size: " << list->size() << endl;
-list->insert(1, 4);
-list->print();
-cout << "set: ";
-list->set(1, 8);
-list->print();
-cout << "empty? " << list->empty() << endl;
-list->clear();
-cout << "after clear: ";
-list->print();
-cout << "Size: " << list->size() << endl;
-list->append(1);
-list->print();
-cout << "get(0): " << list->get(0) << endl;
-list->append(2);
-list->append(4);
-list->print();
-cout << "insert: " << endl;
-list->insert(2,3);
-list->print();
-LinkedList<int> list2 = * list;
-delete list;
-list2.print();
-list2.clear();
-*/
+ * testing Array Queue and Linked Queue
+ */
+int main(int argc, const char * argv[]) {
 
-/*
+	cout << "testing LinkedQueue" << endl << endl;
 
-cout << endl << "testing linkedstack" << endl;
+	//time variables
+	double time_in_ms = 0.0, seconds_diff = 0.0, usec_diff = 0.0;
+	struct timeval tv_start, tv_end;
 
-LinkedStack <int> * list = new LinkedStack <int> {};
-list->push(5);
-list->push(2);
-list->push(3);
-list->print();
-cout << "size: " << list->size() << endl;
-cout << "peek: " << list->peek() << endl;
-cout << "pop: " << list->pop() << endl;
-list->print();
-cout << "pop: " << list->pop() << endl;
-cout << "size: " << list->size() << endl;
-list->print();
-cout << "size: " << list->size() << endl;
-cout << "pop: " << list->pop() << endl;
-list->print();
-cout << "size: " << list->size() << endl;
-cout << "pop: " << list->pop() << endl;
-cout << "size: " << list->size() << endl;
-//delete list;
-list->push(1);
-list->print();
-cout << "size: " << list->size() << endl;
-list->push(2);
-list->print();
-LinkedStack<int> list2 = *list;
-list2.print();
-LinkedStack<int> * list3 = list;
-list3->print();
-//LinkedStack<int> list4 = new LinkedStack<int> {list};
-
-*/
-
-/*
-printf("testing linkedQueue\n");
-
-LinkedQueue <int> * list = new LinkedQueue <int> {};
-cout << "pointer: " << &list << endl;
-
-cout << "dequeue: " << list->dequeue() << endl;
-list->enqueue(1);
-list->enqueue(2);
-list->enqueue(3);
-list->print();
-cout << "size: " << list->size() << endl;
-cout << "peek: " << list->peek() << endl;
-cout << "dequeue: " << list->dequeue() << endl;
-list->print();
-cout << "size: " << list->size() << endl;
-cout << "peek: " << list->peek() << endl;
-cout << "dequeue: " << list->dequeue() << endl;
-cout << "size: " << list->size() << endl;
-cout << "dequeue: " << list->dequeue() << endl;
-cout << "size: " << list->size() << endl;
-list->print();
-list->enqueue(1);
-LinkedQueue<int> list2 = *list;
-list2.print();
-delete list;
+	int sample_size = 1000;
 
 
-//free(list);
-//delete list;
-//cout << "pointer: " << &list << endl;
-*/
+	LinkedQueue<int> * queue_original = new LinkedQueue<int> {};
+	LinkedQueue<int> queue = * queue_original;
 
-/*
-printf("testing ArrayStack\n");
+	for (int index = 0; index < 4; index++)
+	{
+		//linkedstack enqueue
+		gettimeofday(&tv_start, NULL);
+		for(int i = 0; i < sample_size; i++)
+		{
+			queue.enqueue(rand());
+		}
 
-ArrayStack<int> * array = new ArrayStack <int> {};
-cout << "empty: array->empty() " << endl;
-array->print();
-array->push(1);
-array->push(2);
-array->print();
-cout << "size: " << array->size() << endl;
-cout << "pop: " << array->pop() << endl;
-cout << "pop: " << array->pop() << endl;
-array->print();
-array->push(3);
-array->push(4);
-cout << "peek: " << array->peek() << endl;
-cout << "size: " << array->size() << endl;
-array->pop();
-array->pop();
-cout << "peek: " << array->peek() << endl;
-for (int index = 0; index < 102; index++)
-{
-	array->push(index);
+		gettimeofday(&tv_end, NULL);
+		seconds_diff = (tv_end.tv_sec - tv_start.tv_sec)*1000.0;
+		usec_diff = (tv_end.tv_usec - tv_start.tv_usec)/1000.0;
+		time_in_ms = seconds_diff + usec_diff;
+		cout << "time in ms to enqueue " << sample_size << " : " << time_in_ms << endl;
+		cout << "size: " << queue.size() << endl;
+
+		//linkedstack dequeue
+		gettimeofday(&tv_start, NULL);
+		for(int i = 0; i < sample_size; i++)
+		{
+			queue.dequeue();
+		}
+
+		gettimeofday(&tv_end, NULL);
+		seconds_diff = (tv_end.tv_sec - tv_start.tv_sec)*1000.0;
+		usec_diff = (tv_end.tv_usec - tv_start.tv_usec)/1000.0;
+		time_in_ms = seconds_diff + usec_diff;
+		cout << "time in ms to dequeue " << sample_size << " : " <<time_in_ms << endl;
+		cout << "size: " << queue.size() << endl;
+
+		sample_size = sample_size * 10;
+		cout << endl;
+	}
+
+	cout << "--------------------------------------------------" << endl;
+
+	cout << "testing Array Queue" << endl << endl;
+	sample_size = 1000;
+
+	ArrayQueue <int> * array_original = new ArrayQueue<int> {};
+	ArrayQueue <int> array = * array_original;
+
+	for (int index = 0; index < 4; index++)
+	{
+		//array enqueue
+		gettimeofday(&tv_start, NULL);
+		for(int i = 0; i < sample_size; i++)
+		{
+			array.enqueue(rand());
+		}
+
+		gettimeofday(&tv_end, NULL);
+		seconds_diff = (tv_end.tv_sec - tv_start.tv_sec)*1000.0;
+		usec_diff = (tv_end.tv_usec - tv_start.tv_usec)/1000.0;
+		time_in_ms = seconds_diff + usec_diff;
+		cout << "time in ms to enqueue " << sample_size << " : " << time_in_ms << endl;
+		cout << "size: " << array.size() << endl;
+
+		//arrayqueue dequeue
+		gettimeofday(&tv_start, NULL);
+		for(int i = 0; i < sample_size; i++)
+		{
+			array.dequeue();
+		}
+
+		gettimeofday(&tv_end, NULL);
+		seconds_diff = (tv_end.tv_sec - tv_start.tv_sec)*1000.0;
+		usec_diff = (tv_end.tv_usec - tv_start.tv_usec)/1000.0;
+		time_in_ms = seconds_diff + usec_diff;
+		cout << "time in ms to dequeue " << sample_size << " : " <<time_in_ms << endl;
+		cout << "size: " << array.size() << endl;
+
+		sample_size = sample_size * 10;
+		cout << endl;
+	}
+
+	//delete[] array_original;
+
+	// -------------------------------------------------------------
+	/*
+	ArrayQueue <int> * array = new ArrayQueue<int> {};
+
+	for(int i = 0; i < 1000000; i++)
+	{
+		array->enqueue(i);
+	}
+
+	array->print();
+
+	for(int i = 0; i < 1000000; i++)
+	{
+		array->dequeue();
+	}
+
+	array->print();
+	*/
+
+	//------------------------------------------------------------
+
+	/*
+	printf("Testing ArrayQueue\n");
+	ArrayQueue<int> * arrayQueue = new ArrayQueue<int> {};
+	cout << "empty: " << arrayQueue->empty() << endl;
+	arrayQueue->print();
+	arrayQueue->enqueue(1);
+	arrayQueue->enqueue(2);
+	arrayQueue->enqueue(3);
+	arrayQueue->print();
+	cout << "size: " << arrayQueue->size() << endl;
+	cout << "dequeue: " << arrayQueue->dequeue() << endl;
+	cout << "dequeue: " << arrayQueue->dequeue() << endl;
+	arrayQueue->print();
+	cout << "dequeue: " << arrayQueue->dequeue() << endl;
+	arrayQueue->print();
+	cout << "size: " << arrayQueue->size() << endl;
+	cout << "dequeue: " << arrayQueue->dequeue() << endl;
+	arrayQueue->enqueue(4);
+	arrayQueue->enqueue(5);
+	cout << "peek: " << arrayQueue->peek() << endl;
+	arrayQueue->dequeue();
+	arrayQueue->dequeue();
+	arrayQueue->print();
+	cout << "size: " << arrayQueue->size() << endl;
+	for (int index = 0; index < 10; index++)
+	{
+		arrayQueue->enqueue(index);
+	}
+	arrayQueue->print();
+	cout << "size: " << arrayQueue->size() << endl;
+	cout << "peek tail: " << arrayQueue->peekTail() << endl;
+	//arrayQueue->printAtIndex(102);
+	//cout << "size: " << arrayQueue->size() << endl;
+	//cout << "dequeue: " << arrayQueue->dequeue() << endl;
+	//cout << "size: " << arrayQueue->size() << endl;
+
+	*/
+
+
+	// Queue<int> * q1 = new ArrayQueue<int> {};
+	// Queue<int> * q2 = new LinkedQueue<int> {};
+	// test!
+	// delete q1;
+	// delete q2;
+
+	//return EXIT_SUCCESS;
+
 }
-array->push(103);
-array->print();
-ArrayStack<int> array2 = *array;
-array2.print();
-array2.size();
-array2.peek();
-*/
-
-/*
-printf("Testing ArrayQueue\n");
-ArrayQueue<int> * arrayQueue = new ArrayQueue<int> {};
-cout << "empty: " << arrayQueue->empty() << endl;
-arrayQueue->print();
-arrayQueue->enqueue(1);
-arrayQueue->enqueue(2);
-arrayQueue->enqueue(3);
-arrayQueue->print();
-cout << "size: " << arrayQueue->size() << endl;
-cout << "dequeue: " << arrayQueue->dequeue() << endl;
-cout << "dequeue: " << arrayQueue->dequeue() << endl;
-arrayQueue->print();
-cout << "dequeue: " << arrayQueue->dequeue() << endl;
-arrayQueue->print();
-cout << "size: " << arrayQueue->size() << endl;
-cout << "dequeue: " << arrayQueue->dequeue() << endl;
-arrayQueue->enqueue(4);
-arrayQueue->enqueue(5);
-cout << "peek: " << arrayQueue->peek() << endl;
-arrayQueue->dequeue();
-arrayQueue->dequeue();
-arrayQueue->print();
-cout << "size: " << arrayQueue->size() << endl;
-for (int index = 0; index < 102; index++)
-{
-	arrayQueue->enqueue(index);
-}
-arrayQueue->print();
-ArrayQueue<int> arrayQueue2 = *arrayQueue;
-arrayQueue2.print();
-*/
-
-// Queue<int> * q1 = new ArrayQueue<int> {};
-// Queue<int> * q2 = new LinkedQueue<int> {};ß∫
-// test!
-// delete q1;
-// delete q2;
-
-//return EXIT_SUCCESS;
-
-//}
 // main
+
 
 
 
